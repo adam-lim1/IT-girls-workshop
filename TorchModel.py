@@ -236,8 +236,10 @@ def return_jpg(tensor):
     image = unloader(image)
     return image
 
-def match_size(style_img):
-    m = nn.UpsamplingBilinear2d(size=(128,191))
+def match_size(style_img, content_img):
+    content_h = content_img.size()[2]
+    content_w = content_img.size()[3]
+    m = nn.UpsamplingBilinear2d(size=(content_h,content_w))
     style_img = m(style_img)
     return style_img
     
